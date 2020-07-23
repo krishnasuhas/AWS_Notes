@@ -1,0 +1,113 @@
+EC2:
+    It has the capability of:
+        Renting virtual machines (EC2)
+        Storing data on virtual drivers (EBS)
+        Distributing load across machines
+        scaling the services using an using an auto-scaling-group (ASG)
+    It fundamental to understand how the cloud works
+    It can have multiple Security groups
+
+Security Groups:
+    network security in AWS
+    To control the inbound or outbound flow of EC2 machines
+    they act as  firewall to EC2 instances
+    They regulate:
+        Access to ports
+        Authorized IP ranges -IP4 and IP6
+        Control of inbound network (from other to the instance)
+        Control of outbound network (from instance to the other)
+    Can be attached to multiple instances
+    specific to region
+    its good to maintain one security group for SSH access
+    if your app is not accessible(time out) then its security group issue
+    if your app gives a connection refused error then its app error or its not launched
+    Can refer/reuse other security groups
+
+Private vs Public IP:
+    Networking has 2 sort of Ips, (Ipv4, Ipv6)
+        Ipv4: [0-255].[0-255].[0-255].[0-255]
+        Ipv6: XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX
+    Using public ips of a PC/servers we can connect and share the data
+    private network has set of ip range(only they can talk one other)
+    Public IP:
+        machine can be identified on internet
+        must be unique access whole web
+        can be geo located easily
+    private Ip:
+        only identified within private network
+        should be unique with in private network
+        different companies can have same IP
+    Elastic Ip:
+        when you stop and start EC2 instance, it can change its public IP
+        if you need fixed public IP you need elastic IP
+        you can mask the failure one instance by mapping same ip to other instance
+        you can only have 5 elastic ip in your AWS account
+        cons:
+            they often reflect poor architecture design
+            instead use a random public ip with DNS register for it
+            or use a load balancer to avoid public ip
+    By default EC2 comes with public IP for www and private ip for internal network
+
+User Data:
+    you can provide the commands like (updating the libraries, etc...)
+    in user data so every time while launching an instance these will be executed
+
+EC2 instance Launch Types:
+    On Demand Instances: Short workload, Predictable pricing (hourly pricing)
+    Reserved(Minimum 1 year):
+        Reserved Instances: long workloads
+        convertible Reserved instances: long workloads with flexible instances (need windows today/ linux tomorrow..)
+        Scheduled Reserved Instances: every thursday from 3-6pm for 1 year
+    Spot Instance:
+        Short workloads, for cheap, can loose instances (less reliable)
+    Dedicated Instances:
+        no other customers will share your hardware
+    Dedicated Hosts:
+        book an entire physical server, control instance placement
+
+On Demand Instance:
+    Pay for what you used( billing per sec after 1 minute)
+    Has the highest cost but no upfront payment
+    no long term commitment
+    When to use:
+        for short-term,
+        Uninterrupted workloads,
+        Where you cant predict how the app will behave
+Reserved Instances:
+    Regular:
+        Up to 75% discount compared to On-demand
+        pay upfront
+        Reservation period can be 1 or 3 years
+        reserve a specific instance type
+        recommended for steady state usage app(like database)
+    Convertible Reserved Instances:
+        Can change the EC2 instance type
+        up to 54% discount
+    Scheduled Reserved Instances:
+        launch within time window you reserve
+        when you require only a fraction of day/week/month
+EC2 Spot Instances:
+    Can get a discount of up to 90% compared to On-demand
+    Instances that you can "lose" at any point of time if your max price is less than current spot instance
+    Useful for:
+       Batch jobs
+       data analysis
+       image processing
+       everything you can retry even if failed
+    don't use for critical jobs
+    great combo:
+        reserved instances for baseline + on-demand & spot for peaks
+Dedicated Instances:
+    
+Hands on:
+    Create a linux EC2 instance
+    download and keep pem (EC2.pem) key for that instance
+    SSH into that instance using below commands:
+        MAC/Linux:
+            chmod 0400 EC2.pem
+            ssh -i ec2-user@xx.xxx.xxx.xxx
+            ctrl + d - to get out of instance
+        Windows (powerShell):
+            ssh -i 'EC2.pem' ec2-user@18.189.6.30
+            exit to get out of instance
+    User data is added while creating an instance in "configure instance" stage

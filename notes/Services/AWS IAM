@@ -1,0 +1,31 @@
+IAM (Identity ans Access Management):
+    Whole security is here(Users, Groups, Roles)
+    Root Account should never be used/shared
+    Users must be created with proper permissions
+    IAM is a Global region service and center at AWS
+    governed by Policies are written in Json
+    MFA(multi factor authentication) can be setup
+    it has some predefined managed policies
+
+Users:
+    basically a person
+
+Groups:
+    Functions(admins, devOps)
+    Teams(engineer, design, developers)
+    a set of users
+
+Roles:
+    for machines
+    internal usage for aws resources
+
+IAM Federation:
+    for Big enterprise's to manage lot of users
+    to use companies ID for AWS login
+    uses SAML standard (Active Directory)
+
+key points:
+    1 User <-> 1 person
+    1 User <-> multiple groups
+    1 Role <-> Application
+    Never use root credentials for initial setup

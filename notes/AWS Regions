@@ -1,0 +1,13 @@
+Aws Regions:
+    is present all around the world
+    is a cluster of Data centers
+    Names can be Asia Pacific (Mumbai) (ap-south-1), Australia (Sydney) ap-southeast-2,....
+    Most of the AWS services are region-scoped
+    Each region has many availability zones (2 to 6) usually 3
+
+AWS Availability Zones:
+    Names can be ap-southeast-2a, ap-southeast-2b, ap-southeast-2c
+    Each availability zone (AZ) is one/more data centers with enough power, networking and connectivity
+    They are separate and isolated from disasters
+    They are still connected with one another with high bandwidth, ultra low-latency-network
+    
